@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 import uuid
 from datetime import datetime
+from . import storage
 """BaseModel """
 
 
 class BaseModel():
     def __init__(self, *args, **kwargs):
         if kwargs:
-            self.data = {}
             for keys, value in kwargs.items():
                 if keys == "created_at":
                     value = datetime.fromisoformat(value)
@@ -17,10 +17,12 @@ class BaseModel():
                     setattr(self, keys, value)
                 if keys != "__class__":
                     setattr(self, keys, value)
+
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         """ string representation of the class """
@@ -29,6 +31,7 @@ class BaseModel():
     def save(self):
         """ update updated_at attribute with current time"""
         updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """ return dictionary of class attribute """
