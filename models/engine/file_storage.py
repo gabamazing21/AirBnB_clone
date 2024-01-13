@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 
 """ This module serialize and deseriliaze """
 class FileStorage():
@@ -12,26 +13,21 @@ class FileStorage():
     def all(self):
         return self.__objects
     def new(self, obj):
-        print("Let's print object before adding it to object dict: ")
-        print(obj)
-        key = f"{__class__.__name__}.{obj.id}"
-        self.__objects.update({key:obj})
+        self.__objects.update({f"{obj.__class__.__name__}.{obj.id}" : obj})
     def save(self):
         with open(self.__file_path, "w") as file:
-            objects_dict = {}
-            print(f"List of objects are : {self.__objects}")
-            for key, value in enumerate(self.__objects):
-                print(f"key: {key}")
-                print(f"value: {value}")
-                key.to_dict()
-                objects_dict[key] = value.to_dict()
-            print("print list of object before serializing it:  ")
-            print(objects_dict)
-            json.dump(objects_dict, file)
+            dicts = {}
+            for obj in self.__objects.values():
+                dicts[obj.id] = obj.to_dict()
+            json.dump(dicts, file)
     def reload(self):
         if os.path.exists(self.__file_path):
             with open(self.__file_path, "r") as fi:
                 data = json.load(fi)
-                self.__objects = data
+                from ..base_model import BaseModel
+                for i, j in data.items():
+                    obj = BaseModel(**j)
+                    self.__objects.update({i : obj})
+
         else:
             pass
