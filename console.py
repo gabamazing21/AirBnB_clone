@@ -34,7 +34,8 @@ class HBNBCommand(cmd.Cmd):
         elif len(arg.split()) == 1:
             print("** instance id missing **")
         elif len(arg.split()) == 2:
-            class_name, key = map(str, arg.split())
+            class_name, class_id = map(str, arg.split())
+            key = f"{class_name}.{class_id}"
             if (class_name != "BaseModel"):
                 print("** class doesn't exist **")
             elif key not in object_list:
@@ -56,7 +57,8 @@ class HBNBCommand(cmd.Cmd):
         elif len(arg.split()) == 1:
             print("** instance id missing **")
         elif len(arg.split()) == 2:
-            class_name, key = map(str, arg.split())
+            class_name, class_id = map(str, arg.split())
+            key = f"{class_name}.{class_id}"
             if (class_name != "BaseModel"):
                 print("** class doesn't exist **")
             elif key not in object_list:
@@ -84,11 +86,12 @@ class HBNBCommand(cmd.Cmd):
         all_object = storage.all()
         if (arg_number == 4):
             class_name, class_id, atr_name, atr_value = map(str, arg.split())
+            key = f"{class_name}.{class_id}"
             if (class_name != "BaseModel"):
                 print("** class doesn't exist **")
                 return
 
-            if (class_id in all_object):
+            if (key in all_object):
                 my_object = all_object[class_id]
                 setattr(my_object, atr_name, atr_value)
                 storage.save()

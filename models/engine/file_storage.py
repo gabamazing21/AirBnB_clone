@@ -23,8 +23,8 @@ class FileStorage():
         """save to file in json"""
         with open(self.__file_path, "w") as file:
             dicts = {}
-            for obj in self.__objects.values():
-                dicts[obj.id] = obj.to_dict()
+            for key, obj in self.__objects.items():
+                dicts[key] = obj.to_dict()
             json.dump(dicts, file)
 
     def reload(self):
@@ -33,9 +33,17 @@ class FileStorage():
             with open(self.__file_path, "r") as fi:
                 data = json.load(fi)
                 from ..base_model import BaseModel
+                from ..user import User
+                models = ["BaseModel", "User"]
                 for i, j in data.items():
-                    obj = BaseModel(**j)
-                    self.__objects.update({i: obj})
+                    key_pair = i.split(".")
+                    class_name = key_pair[0]
+                    if class_name == models[0]:
+                        obj = BaseModel(**j)
+                        self.__objects.update({i: obj})
+                    elif class_name == models[1]:
+                        obj = User(**j)
+                        self.__objects.update({i: obj})
 
         else:
             pass
