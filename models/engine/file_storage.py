@@ -34,7 +34,13 @@ class FileStorage():
                 data = json.load(fi)
                 from ..base_model import BaseModel
                 from ..user import User
-                models = ["BaseModel", "User"]
+                from ..state import State
+                from ..city import City
+                from ..amenity import Amenity
+                from ..place import Place
+                from ..review import Review
+                models = (["BaseModel", "User", "State", "City", "Amenity"
+                           "Place", "Review"])
                 for i, j in data.items():
                     key_pair = i.split(".")
                     class_name = key_pair[0]
@@ -44,6 +50,20 @@ class FileStorage():
                     elif class_name == models[1]:
                         obj = User(**j)
                         self.__objects.update({i: obj})
-
+                    elif class_name == models[2]:
+                        obj = State(**j)
+                        self.__objects.update({i: obj})
+                    elif class_name == models[3]:
+                        obj = City(**j)
+                        self.__objects.update({i: obj})
+                    elif class_name == models[4]:
+                        obj = Amenity(**j)
+                        self.__objects.update({i: obj})
+                    elif class_name == models[5]:
+                        obj = Place(**j)
+                        self.__objects.update({i: obj})
+                    elif class_name == models[6]:
+                        obj = Review(**j)
+                        self.__objects.update({i: obj})
         else:
             pass
