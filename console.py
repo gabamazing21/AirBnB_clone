@@ -13,8 +13,6 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif (arg == "BaseModel"):
             my_base_model = BaseModel()
-            my_base_model.name = None
-            my_base_model.my_number = None
             my_base_model.save()
             print(my_base_model.id)
         else:
@@ -83,13 +81,31 @@ class HBNBCommand(cmd.Cmd):
         all_object = storage.all()
         if(arg_number == 4):
             class_name, class_id, atr_name, atr_value = map(str, arg.split())
+            if (class_name != "BaseModel"):
+                print("** class doesn't exist **")
+                return
+
             if (class_id in all_object):
                 my_object = all_object[class_id]
                 obj_dict = my_object.to_dict()
                 new_base_model = BaseModel(**obj_dict)
                 setattr(new_base_model, atr_name, atr_value)
                 new_base_model.save()
-                
+            else:
+                print("** instance id missing **")
+        elif(arg_number == 0):
+            print("** class name missing **")
+        elif(arg_number == 1):
+            print("** instance id missing **")
+        elif(arg_number == 2):
+            print("** attribute name missing **")
+        elif(arg_number == 3):
+            print("** value missing **")
+        else:
+            pass
+    def help_update(self):
+        print("""Usage: update <class name> <id> 
+        <attribute name> "<attribute value>""")
 
     def help_all(self):
         print("$ all BaseModel")

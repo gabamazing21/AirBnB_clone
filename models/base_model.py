@@ -12,12 +12,12 @@ class BaseModel():
         """BaseModel Instance"""
         if kwargs:
             self.__dict__.update({key: value for key, value
-                                  in kwargs.items() 
-                                  if key != "__class__"}
-                    )
-            self.__dict__["created_at"] = fromisoformat(self.__dict__["created_at"])
-                    setattr(self, keys, value)
-            self.dict__["updated_at"] = datetime.fromisoformat(self.__dict__["updated_at"])
+                                  in kwargs.items()
+                                  if key != "__class__"})
+            self.__dict__["created_at"] = (datetime.fromisoformat
+                                           (self.__dict__["created_at"]))
+            self.__dict__["updated_at"] = (datetime.fromisoformat
+                                           (self.__dict__["updated_at"]))
 
         else:
             self.id = str(uuid.uuid4())
