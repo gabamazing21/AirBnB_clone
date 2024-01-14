@@ -44,3 +44,11 @@ class TestBaseModel(unittest.TestCase):
         initially_updated_at = self.model.updated_at
         self.model.save()
         self.assertAlmostEqual(self.model.updated_at, initially_updated_at, delta=timedelta(seconds=1))
+    def test_kwargs(self):
+        model_dict = self.model.to_dict()
+        new_model = BaseModel(**model_dict)
+        self.assertEqual(new_model.id, self.model.id)
+        self.assertEqual(new_model.name, self.model.name)
+        self.assertEqual(new_model.my_number, self.model.my_number)
+        self.assertEqual(new_model.created_at, self.model.created_at)
+        self.assertEqual(new_model.updated_at, self.model.updated_at)
