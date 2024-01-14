@@ -1,8 +1,8 @@
 #!/usr//bin/python3
+""" Console Module """
 import cmd
 from models.base_model import BaseModel
 from models import storage
-""" Console Module """
 
 class HBNBCommand(cmd.Cmd):
     """Simple command processor example."""
