@@ -6,7 +6,10 @@ from . import storage
 
 
 class BaseModel():
+    """BaseModel Class"""
+
     def __init__(self, *args, **kwargs):
+        """BaseModel Instance"""
         self.name = kwargs.pop("name", None)
         self.my_number = kwargs.pop("my_number", None)
         if kwargs:
