@@ -2,7 +2,9 @@
 """ Console Module """
 import cmd
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
+models = ["BaseModel", "User"]
 
 
 class HBNBCommand(cmd.Cmd):
@@ -13,10 +15,16 @@ class HBNBCommand(cmd.Cmd):
         """Create BaseModel instance"""
         if not arg:
             print("** class name missing **")
-        elif (arg == "BaseModel"):
-            my_base_model = BaseModel()
-            my_base_model.save()
-            print(my_base_model.id)
+        elif (arg in models):
+            if (arg == models[0]):
+                my_base_model = BaseModel()
+                my_base_model.save()
+                print(my_base_model.id)
+            elif (arg == models[1]):
+                my_base_model = User()
+                my_base_model.save()
+                print(my_base_model.id)
+
         else:
             print("** class doesn't exist **")
 
@@ -36,7 +44,7 @@ class HBNBCommand(cmd.Cmd):
         elif len(arg.split()) == 2:
             class_name, class_id = map(str, arg.split())
             key = f"{class_name}.{class_id}"
-            if (class_name != "BaseModel"):
+            if (class_name not in models):
                 print("** class doesn't exist **")
             elif key not in object_list:
                 print("** no instance found **")
@@ -59,7 +67,7 @@ class HBNBCommand(cmd.Cmd):
         elif len(arg.split()) == 2:
             class_name, class_id = map(str, arg.split())
             key = f"{class_name}.{class_id}"
-            if (class_name != "BaseModel"):
+            if (class_name not in models):
                 print("** class doesn't exist **")
             elif key not in object_list:
                 print("** no instance found **")
@@ -73,11 +81,14 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """Prints all string
         representation of all instances based """
-        if (arg == "BaseModel"):
+        if (arg in models):
             all_obj = storage.all()
             for obj_id in all_obj.keys():
-                obj = all_obj[obj_id]
-                print(obj)
+                key_pair = obj_id.split('.')
+                class_name = key_pair[0]
+                if (arg == class_name):
+                    obj = all_obj[obj_id]
+                    print(obj)
         else:
             print("** class doesn't exist **")
 
@@ -87,12 +98,12 @@ class HBNBCommand(cmd.Cmd):
         if (arg_number == 4):
             class_name, class_id, atr_name, atr_value = map(str, arg.split())
             key = f"{class_name}.{class_id}"
-            if (class_name != "BaseModel"):
+            if (class_name not in models):
                 print("** class doesn't exist **")
                 return
 
             if (key in all_object):
-                my_object = all_object[class_id]
+                my_object = all_object[key]
                 setattr(my_object, atr_name, atr_value)
                 storage.save()
             else:
