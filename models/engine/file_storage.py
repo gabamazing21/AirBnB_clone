@@ -39,8 +39,7 @@ class FileStorage():
                 from ..amenity import Amenity
                 from ..place import Place
                 from ..review import Review
-                models = (["BaseModel", "User", "State", "City", "Amenity"
-                           "Place", "Review"])
+                models = (["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"])
                 for i, j in data.items():
                     key_pair = i.split(".")
                     class_name = key_pair[0]

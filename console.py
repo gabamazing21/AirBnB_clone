@@ -6,11 +6,15 @@ from models.user import User
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
-from models.Place import Place
-from models.review import Review 
+from models.place import Place
+from models.review import Review
 from models import storage
+
+
 models = (["BaseModel", "User", "State",
-           "City", "Amenity", "Place", "Review" ])
+           "City", "Amenity", "Place", "Review"])
+
+
 class HBNBCommand(cmd.Cmd):
     """Simple command processor example."""
     prompt = '(hbnb) '
@@ -29,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
                 my_base_model.save()
                 print(my_base_model.id)
             elif (arg == models[2]):
-                my_base_model = Sate()
+                my_base_model = State()
                 my_base_model.save()
                 print(my_base_model.id)
             elif (arg == models[3]):

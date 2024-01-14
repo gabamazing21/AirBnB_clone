@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """Place Model"""
 from models.base_model import BaseModel
+
+
 class Place(BaseModel):
     """Place Class"""
     city_id = ""
@@ -16,4 +18,4 @@ class Place(BaseModel):
     amenity_ids = {}
 
     def __init__(self, *args, **kwargs):
-        super.__init__(*args, **kwargs):
+        super().__init__(*args, **kwargs)
