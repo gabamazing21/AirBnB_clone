@@ -4,9 +4,11 @@ import cmd
 from models.base_model import BaseModel
 from models import storage
 
+
 class HBNBCommand(cmd.Cmd):
     """Simple command processor example."""
     prompt = '(hbnb) '
+
     def do_create(self, arg):
         """Create BaseModel instance"""
         if not arg:
@@ -22,16 +24,16 @@ class HBNBCommand(cmd.Cmd):
         print("Ex: (hbnb) create BaseModel")
 
     def do_show(self, arg):
-        """print string representation of an 
-        instance based on the class 
+        """print string representation of an
+        instance based on the class
         name and id"""
 
         object_list = storage.all()
-        if len (arg.split()) == 0:
+        if len(arg.split()) == 0:
             print("** class name missing **")
-        elif len (arg.split()) == 1:
+        elif len(arg.split()) == 1:
             print("** instance id missing **")
-        elif len (arg.split()) == 2:
+        elif len(arg.split()) == 2:
             class_name, key = map(str, arg.split())
             if (class_name != "BaseModel"):
                 print("** class doesn't exist **")
@@ -45,15 +47,15 @@ class HBNBCommand(cmd.Cmd):
         print(" Ex: $ show BaseModel 1234-1234-1234.")
 
     def do_destroy(self, arg):
-        """ Deletes an instance 
+        """ Deletes an instance
         based on the class name and id"""
 
         object_list = storage.all()
-        if len (arg.split()) == 0:
+        if len(arg.split()) == 0:
             print("** class name missing **")
-        elif len (arg.split()) == 1:
+        elif len(arg.split()) == 1:
             print("** instance id missing **")
-        elif len (arg.split()) == 2:
+        elif len(arg.split()) == 2:
             class_name, key = map(str, arg.split())
             if (class_name != "BaseModel"):
                 print("** class doesn't exist **")
@@ -67,7 +69,7 @@ class HBNBCommand(cmd.Cmd):
         print(" Ex: $ destroy BaseModel 1234-1234-1234.")
 
     def do_all(self, arg):
-        """Prints all string 
+        """Prints all string
         representation of all instances based """
         if (arg == "BaseModel"):
             all_obj = storage.all()
@@ -76,10 +78,11 @@ class HBNBCommand(cmd.Cmd):
                 print(obj)
         else:
             print("** class doesn't exist **")
+
     def do_update(self, arg):
         arg_number = len(arg.split())
         all_object = storage.all()
-        if(arg_number == 4):
+        if (arg_number == 4):
             class_name, class_id, atr_name, atr_value = map(str, arg.split())
             if (class_name != "BaseModel"):
                 print("** class doesn't exist **")
@@ -87,24 +90,23 @@ class HBNBCommand(cmd.Cmd):
 
             if (class_id in all_object):
                 my_object = all_object[class_id]
-                obj_dict = my_object.to_dict()
-                new_base_model = BaseModel(**obj_dict)
-                setattr(new_base_model, atr_name, atr_value)
-                new_base_model.save()
+                setattr(my_object, atr_name, atr_value)
+                storage.save()
             else:
                 print("** instance id missing **")
-        elif(arg_number == 0):
+        elif (arg_number == 0):
             print("** class name missing **")
-        elif(arg_number == 1):
+        elif (arg_number == 1):
             print("** instance id missing **")
-        elif(arg_number == 2):
+        elif (arg_number == 2):
             print("** attribute name missing **")
-        elif(arg_number == 3):
+        elif (arg_number == 3):
             print("** value missing **")
         else:
             pass
+
     def help_update(self):
-        print("""Usage: update <class name> <id> 
+        print("""Usage: update <class name> <id>
         <attribute name> "<attribute value>""")
 
     def help_all(self):
@@ -133,6 +135,7 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """do nothing"""
         pass
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
