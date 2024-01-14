@@ -1,8 +1,8 @@
 #!/usr/bin/python3
+"""BaseModel """
 import uuid
 from datetime import datetime
 from . import storage
-"""BaseModel """
 
 
 class BaseModel():
