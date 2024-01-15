@@ -146,6 +146,15 @@ class HBNBCommand(cmd.Cmd):
         else:
             pass
 
+    def do_count(self, arg):
+        """count instance"""
+        if (arg in models):
+            all_obj = storage.all()
+            list_obj = [key for key in all_obj.keys() if arg in key]
+            print(len(list_obj))
+        else:
+            print("** class doesn't exist **")
+
     def help_update(self):
         print("""Usage: update <class name> <id>
         <attribute name> "<attribute value>""")
@@ -156,7 +165,9 @@ class HBNBCommand(cmd.Cmd):
     def onecmd(self, line):
         args = (line.split("."))
         args_len = len(args)
-        if (args_len == 2 and args[0] and args[1] == "all()"):
+        if (args_len == 2 and args[0] and args[1] == "count()"):
+            return self.do_count(args[0])
+        elif (args_len == 2 and args[0] and args[1] == "all()"):
             return self.do_all(args[0])
         else:
             super().onecmd(line)
@@ -171,6 +182,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, line):
         """quit to leave console"""
+        self.stop = True
         return True
 
     def help_quit(self):
