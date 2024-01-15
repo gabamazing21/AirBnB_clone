@@ -153,6 +153,14 @@ class HBNBCommand(cmd.Cmd):
     def help_all(self):
         print("$ all BaseModel")
 
+    def onecmd(self, line):
+        args = (line.split("."))
+        args_len = len(args)
+        if (args_len == 2 and args[0] and args[1] == "all()"):
+            return self.do_all(args[0])
+        else:
+            super().onecmd(line)
+
     def do_EOF(self, line):
         """EOF to leave console"""
         return True
