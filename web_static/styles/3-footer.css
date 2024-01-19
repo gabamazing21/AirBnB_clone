@@ -8,4 +8,8 @@ footer {
     display: flex;
     margin: auto 0;
 }
+footer p {
+    text-align: center;
+    margin: 0;
+}
 
