@@ -18,10 +18,13 @@
     border: none;
     border-radius: 4px;
     margin-right: 30px;
+    opacity: 100%;
+    text-align: center;
   
 
  }
  button:hover {
     opacity: 90%;
+    filter: alpha(opacity=100);
     
   }
