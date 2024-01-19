@@ -1,22 +1,23 @@
 #!/usr/bin/python3
+"""BaseModel """
 import uuid
 from datetime import datetime
 from . import storage
-"""BaseModel """
 
 
 class BaseModel():
+    """BaseModel Class"""
+
     def __init__(self, *args, **kwargs):
+        """BaseModel Instance"""
         if kwargs:
-            for keys, value in kwargs.items():
-                if keys == "created_at":
-                    value = datetime.fromisoformat(value)
-                    setattr(self, keys, value)
-                if keys == "updated_at":
-                    value = datetime.fromisoformat(value)
-                    setattr(self, keys, value)
-                if keys != "__class__":
-                    setattr(self, keys, value)
+            self.__dict__.update({key: value for key, value
+                                  in kwargs.items()
+                                  if key != "__class__"})
+            self.__dict__["created_at"] = (datetime.fromisoformat
+                                           (self.__dict__["created_at"]))
+            self.__dict__["updated_at"] = (datetime.fromisoformat
+                                           (self.__dict__["updated_at"]))
 
         else:
             self.id = str(uuid.uuid4())
@@ -26,7 +27,7 @@ class BaseModel():
 
     def __str__(self):
         """ string representation of the class """
-        return f"[BaseModel] ({self.id}) {self.__dict__}"
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """ update updated_at attribute with current time"""
@@ -35,11 +36,8 @@ class BaseModel():
 
     def to_dict(self):
         """ return dictionary of class attribute """
-        class_property = {}
-        class_property["id"] = self.id
-        class_property["__class__"] = "BaseModel"
-        class_property["name"] = self.name
-        class_property["my_number"] = self.my_number
-        class_property["created_at"] = self.created_at.isoformat()
-        class_property["updated_at"] = self.updated_at.isoformat()
+        class_property = self.__dict__.copy()
+        class_property['__class__'] = self.__class__.__name__
+        class_property['created_at'] = self.created_at.isoformat()
+        class_property['updated_at'] = self.updated_at.isoformat()
         return class_property
