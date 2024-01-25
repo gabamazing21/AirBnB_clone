@@ -1,7 +1,10 @@
 .places {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
     justify-content: space-evenly;
+
 }
 .places h1{
     font-size: 30px;
@@ -63,6 +66,18 @@ article{
 
 
 }
+.information .max_guest, .number_rooms, .number_bathrooms {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 80px;
+    font-size: 15px;
+    text-align: center;
+
+
+}
 .max_guest {
     background-image: url("../images/icon_group.png");
     background-position: top;
@@ -95,6 +110,13 @@ article{
 
 .user {
     margin-right: auto;
+    margin-left: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+    height: 20px;
+    width: 100%;
+    font-size: 20px;
 }
 
 .ownerBold {
@@ -102,6 +124,6 @@ article{
 }
 .description {
     text-align: justify;
-    font-size: 15px;
+    font-size: 20px;
     
 }

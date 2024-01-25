@@ -1,17 +1,10 @@
 footer {
-    background-color: white;
+    margin: auto auto 0 auto;
+    background-color: #FFFFFF;
     height: 60px;
     width: 100%;
-    border-top: 1px solid #CCCCCC;
+    display: flex;
     align-items: center;
     justify-content: center;
-    display: flex;
-    margin: auto 0;
-    position: absolute;
-    bottom: 0;
-    text-align: center;
-}
-
-footer.p{
-    margin: 0;
+    border-top: 1px solid #CCCCCC;
 }
