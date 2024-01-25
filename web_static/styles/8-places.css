@@ -86,3 +86,14 @@ article{
     background-repeat: no-repeat;  
     width: 100px; 
 }
+number_bathrooms p {
+    margin-top: 50px
+}
+
+.user {
+    margin-right: auto;
+}
+
+.ownerBold {
+    font-weight: bold;
+}
