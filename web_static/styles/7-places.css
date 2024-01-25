@@ -3,13 +3,13 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
-.places h1{
+
+h1{
     font-size: 30px;
     padding-left: 3%;
     width: 100%;
     height: 30px;
-    align-content: left;
-
+    align-items: left;
 }
 article{
     width: 390px;
