@@ -100,3 +100,8 @@ article{
 .ownerBold {
     font-weight: bold;
 }
+.description {
+    text-align: justify;
+    font-size: 15px;
+    
+}
