@@ -176,6 +176,9 @@ class HBNBCommand(cmd.Cmd):
         elif (args_len == 2 and args[0] and ("destroy" in args[1])):
             id_inst = re.search(r'"([^"]+)"', args[1])
             return self.do_destroy(f"{args[0]} {id_inst.group(1)}")
+        elif (args_len == 2 and args[0] and ("update" in args[1])):
+            id_inst = re.search(r'update\("([^"]+)", "([^"]+)", "([^"]+)"\)', args[1])
+            return self.do_update(f"{args[0]} {id_inst.group(1)} {id_inst.group(2)} {id_inst.group(3)}")
         else:
             super().onecmd(line)
 
