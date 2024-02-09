@@ -171,9 +171,11 @@ class HBNBCommand(cmd.Cmd):
         elif (args_len == 2 and args[0] and args[1] == "all()"):
             return self.do_all(args[0])
         elif (args_len == 2 and args[0] and ("show" in args[1])):
-            print("we are in show(id)")
             id_inst = re.search(r'"([^"]+)"', args[1])
             return self.do_show(f"{args[0]} {id_inst.group(1)}")
+        elif (args_len == 2 and args[0] and ("destroy" in args[1])):
+            id_inst = re.search(r'"([^"]+)"', args[1])
+            return self.do_destroy(f"{args[0]} {id_inst.group(1)}")
         else:
             super().onecmd(line)
 
