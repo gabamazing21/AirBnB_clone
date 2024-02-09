@@ -9,6 +9,7 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 from models import storage
+import re
 
 
 models = (["BaseModel", "User", "State",
@@ -169,6 +170,10 @@ class HBNBCommand(cmd.Cmd):
             return self.do_count(args[0])
         elif (args_len == 2 and args[0] and args[1] == "all()"):
             return self.do_all(args[0])
+        elif (args_len == 2 and args[0] and ("show" in args[1])):
+            print("we are in show(id)")
+            id_inst = re.search(r'"([^"]+)"', args[1])
+            return self.do_show(f"{args[0]} {id_inst.group(1)}")
         else:
             super().onecmd(line)
 
